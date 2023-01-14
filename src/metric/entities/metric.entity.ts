@@ -33,7 +33,7 @@ Metric.init({
       type: DataTypes.INTEGER,
        allowNull: false
     },
-    id_metric: {
+    id_repository: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {         // User belongsTo Company 1:1

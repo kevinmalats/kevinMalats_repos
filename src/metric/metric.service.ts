@@ -2,15 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { IMetrics } from 'src/interfaces/IMetrics';
 import { CreateMetricDto } from './dto/create-metric.dto';
 import { UpdateMetricDto } from './dto/update-metric.dto';
+import { Metric } from './entities/metric.entity';
 
 @Injectable()
 export class MetricService implements IMetrics {
-  create(createMetricDto: CreateMetricDto) {
-    return 'This action adds a new metric';
+  async create(createMetricDto: CreateMetricDto) {
+    const metric = await Metric.create({...createMetricDto});
+    return {...metric};
   }
 
   findAll() {
-    return `This action returns all metric`;
+    const metric = Metric.findAll();
+    return metric;
   }
 
   findOne(id: number) {

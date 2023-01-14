@@ -36,8 +36,18 @@ export class RepositoryService implements IRepository {
     return {repositorios:[repos]};
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} repository`;
+  async findOne(id: number) {
+    const repository = await Repository.findByPk(id);
+    return repository;
+  }
+
+  async findReposByTribe(id_tribe: string) {
+    const repository = await Repository.findAll({
+      where: {
+        id_tribe 
+      }
+    });
+    return repository;
   }
 
   update(id: number, updateRepositoryDto: UpdateRepositoryDto) {

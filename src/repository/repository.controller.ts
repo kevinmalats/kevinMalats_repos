@@ -22,6 +22,11 @@ export class RepositoryController {
     return this.repositoryService.getReposMock();
   }
 
+  @Get("tribe/:id")
+  getReposByTribe(@Param('id') id: string) {
+    return this.repositoryService.findReposByTribe(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.repositoryService.findOne(+id);
