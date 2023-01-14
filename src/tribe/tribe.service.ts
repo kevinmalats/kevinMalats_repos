@@ -1,15 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { ITribe } from 'src/interfaces/ITribe';
 import { CreateTribeDto } from './dto/create-tribe.dto';
 import { UpdateTribeDto } from './dto/update-tribe.dto';
+import { Tribe } from './entities/tribe.entity';
+
 
 @Injectable()
-export class TribeService {
-  create(createTribeDto: CreateTribeDto) {
-    return 'This action adds a new tribe';
+export class TribeService implements ITribe{
+  async create(createTribeDto: CreateTribeDto) {
+    const tribe = await Tribe.create({...createTribeDto});
+    return {...tribe};
   }
 
   findAll() {
-    return `This action returns all tribe`;
+    const tribe = Tribe.findAll();
+    return tribe;
   }
 
   findOne(id: number) {

@@ -3,7 +3,9 @@ import { CreateRepositoryDto } from './dto/create-repository.dto';
 import { UpdateRepositoryDto } from './dto/update-repository.dto';
 import {StateRepositoryEnum} from "./../infrastructure/StateRepositoryEnum"
 import { GetRepositoryDto } from './dto/get-repository.dto';
-import { IServices } from 'src/interfaces/IServices';
+import { IRepository } from 'src/interfaces/IRepository';
+import { Repository } from './entities/repository.entity';
+
 
 const repos: GetRepositoryDto[] = [
   {
@@ -21,13 +23,17 @@ const repos: GetRepositoryDto[] = [
 ];
 
 @Injectable()
-export class RepositoryService implements IServices {
-  create(createRepositoryDto: CreateRepositoryDto) {
-    return 'This action adds a new repository';
+export class RepositoryService implements IRepository {
+  async create(createRepositoryDto: CreateRepositoryDto) {
+    const repository = await Repository.create({...createRepositoryDto});
+    return {...repository};
   }
 
   findAll() {
-    return {repositorios:{...repos}};
+    return {repositorios:[repos]};
+  }
+  getReposMock() {
+    return {repositorios:[repos]};
   }
 
   findOne(id: number) {

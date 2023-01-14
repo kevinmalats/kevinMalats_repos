@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { IMetrics } from 'src/interfaces/IMetrics';
 import { CreateMetricDto } from './dto/create-metric.dto';
 import { UpdateMetricDto } from './dto/update-metric.dto';
 
 @Injectable()
-export class MetricService {
+export class MetricService implements IMetrics {
   create(createMetricDto: CreateMetricDto) {
     return 'This action adds a new metric';
   }

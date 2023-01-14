@@ -17,6 +17,11 @@ export class RepositoryController {
     return this.repositoryService.findAll();
   }
 
+  @Get("reposmock")
+  getReposMock() {
+    return this.repositoryService.getReposMock();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.repositoryService.findOne(+id);

@@ -1,11 +1,12 @@
 import dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
+import { IPostgresSql } from 'src/interfaces/IPostgresGateway';
 console.log(dotenv)
 //dotenv.config();
 // Option 1: Passing a connection URI
  // Example for postgres
 
-export class PostgresSql{
+export class PostgresSql implements IPostgresSql{
     constructor(){
         this.connect();
         
