@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { IServices } from 'src/interfaces/IServices';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
 import { Organization } from './entities/organization.entity';
 
 @Injectable()
-export class OrganizationService {
+export class OrganizationService implements IServices {
  async create(createOrganizationDto: CreateOrganizationDto) {
      const organization = await Organization.create({...createOrganizationDto});
     return {...organization};

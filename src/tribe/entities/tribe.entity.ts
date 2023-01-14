@@ -2,10 +2,10 @@ import { DataTypes, Model } from "sequelize";
 import { PostgresSql } from "src/db/database";
 const _postgres: PostgresSql = new PostgresSql();
 
-export class Organization extends Model  {
+export class Tribe extends Model  {
   otherPublicField: string;
 }
-Organization.init({
+Tribe.init({
     // Model attributes are defined here
     id: {
         type: DataTypes.INTEGER,
@@ -19,9 +19,17 @@ Organization.init({
     status: {
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
+    id_organization: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {        
+          model: 'Organizations',
+          key: 'id'
+        }
+      }
   }, {
     // Other model options go here
     sequelize: _postgres.sequelize, // We need to pass the connection instance
-    modelName: 'Organization' // We need to choose the model name
+    modelName: 'Tribe' // We need to choose the model name
   });
