@@ -4,5 +4,5 @@ export class CreateMetricDto {
     vulnerabilities:number;
     hotspot:number;
     code_smells:number;
-    id_repository:number;
+    id_repository:string;
 }

@@ -5,8 +5,9 @@ import {StateRepositoryEnum} from "./../infrastructure/StateRepositoryEnum"
 import { GetRepositoryDto } from './dto/get-repository.dto';
 import { IRepository } from 'src/interfaces/IRepository';
 import { Repository } from './entities/repository.entity';
-
-
+import { Metric } from 'src/metric/entities/metric.entity';
+import { Tribe } from 'src/tribe/entities/tribe.entity';
+import { get } from "lodash";
 const repos: GetRepositoryDto[] = [
   {
       id:1,
@@ -42,11 +43,27 @@ export class RepositoryService implements IRepository {
   }
 
   async findReposByTribe(id_tribe: string) {
-    const repository = await Repository.findAll({
+    const repository = await Tribe.findAll({
+      include: [{
+        model: Repository,
+        required:true,
+        attributes: ["name"],
+        include : [
+          {
+              model: Metric,
+              required: true,
+              attributes: ["coverage","bugs","vulnerabilities",
+            "hotspot","code_smells"
+            ],
+             
+        }
+      ],
       where: {
-        id_tribe 
-      }
+        id_tribe
+}
+      }]
     });
+  console.log(repository)
     return repository;
   }
 
@@ -56,5 +73,15 @@ export class RepositoryService implements IRepository {
 
   remove(id: number) {
     return `This action removes a #${id} repository`;
+  }
+
+  private _buildResponse(tribe:Tribe[]){
+    tribe.map((res)=>{
+      const response = {
+        tribe: get(tribe,"name",""),
+        
+      }
+    })
+
   }
 }

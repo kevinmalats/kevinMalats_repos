@@ -1,6 +1,7 @@
 
 import { DataTypes, Model } from "sequelize";
 import { PostgresSql } from "src/db/database";
+import { Repository } from "src/repository/entities/repository.entity";
 const _postgres: PostgresSql = new PostgresSql();
 
 export class Metric extends Model  {
@@ -8,9 +9,12 @@ export class Metric extends Model  {
 }
 Metric.init({
     // Model attributes are defined here
-    id: {
+    id_repository: {
         type: DataTypes.INTEGER,
-        autoIncrement: true,
+        references: {         // User belongsTo Company 1:1
+            model: 'Repositories',
+            key: 'id'
+          },
         primaryKey: true
       },
     coverage: {
@@ -32,17 +36,12 @@ Metric.init({
     code_smells: {
       type: DataTypes.INTEGER,
        allowNull: false
-    },
-    id_repository: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {         // User belongsTo Company 1:1
-          model: 'Repositories',
-          key: 'id'
-        }
-      }
+    }
   }, {
     // Other model options go here
     sequelize: _postgres.sequelize, // We need to pass the connection instance
     modelName: 'Metric' // We need to choose the model name
   });
+
+  Metric.belongsTo(Repository,{foreignKey: 'id_repository', targetKey: 'id'})
+  Repository.hasOne(Metric,{foreignKey: 'id_repository', sourceKey: 'id'})

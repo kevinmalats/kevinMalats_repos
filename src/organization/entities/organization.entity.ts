@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { PostgresSql } from "src/db/database";
+import { Tribe } from "src/tribe/entities/tribe.entity";
 const _postgres: PostgresSql = new PostgresSql();
 
 export class Organization extends Model  {

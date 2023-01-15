@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { PostgresSql } from "src/db/database";
+import { Organization } from "src/organization/entities/organization.entity";
 const _postgres: PostgresSql = new PostgresSql();
 
 export class Tribe extends Model  {
@@ -33,3 +34,7 @@ Tribe.init({
     sequelize: _postgres.sequelize, // We need to pass the connection instance
     modelName: 'Tribe' // We need to choose the model name
   });
+
+  Tribe.belongsTo(Organization,{foreignKey: 'id_organization', targetKey: 'id'})
+  Organization.hasOne(Tribe,{foreignKey: 'id_organization', sourceKey: 'id'})
+
