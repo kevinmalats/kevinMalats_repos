@@ -34,7 +34,7 @@ export class RepositoryController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRepositoryDto: UpdateRepositoryDto) {
-    return this.repositoryService.update(+id, updateRepositoryDto);
+    return this.repositoryService.update(id, updateRepositoryDto);
   }
 
   @Delete(':id')

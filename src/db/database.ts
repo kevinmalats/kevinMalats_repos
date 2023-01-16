@@ -1,8 +1,6 @@
-import dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
 import { IPostgresSql } from 'src/interfaces/IPostgresGateway';
-console.log(dotenv)
-//dotenv.config();
+console.log(process.env.DATABASE_URL)
 // Option 1: Passing a connection URI
  // Example for postgres
 

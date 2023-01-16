@@ -8,6 +8,6 @@ export interface IRepository {
     getReposMock();
     findOne(id: number);
     findReposByTribe(id_tribe: string);
-    update(id: number, updateRepositoryDto: UpdateRepositoryDto);
+    update(id: string, updateRepositoryDto: UpdateRepositoryDto);
     remove(id: number);
 }
